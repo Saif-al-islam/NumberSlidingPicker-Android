@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="NumberSlidingPickerView">
+        <attr name="minNum" format="integer"/>
+        <attr name="maxNum" format="integer"/>
+        <attr name="initNum" format="integer"/>
+        <attr name="stepNum" format="integer"/>
+        <attr name="orientation" format="enum">
+            <enum name="Vertical" value="0"/>
+            <enum name="Horizontal" value="1"/>
+        </attr>
+        <attr name="unitText" format="string"/>
+        <attr name="numMargin" format="dimension"/>
+        <attr name="unitTopMargin" format="dimension"/>
+        <attr name="unitBottomMargins" format="dimension"/>
+        <attr name="incDecLength" format="dimension"/>
+        <attr name="unitTextSize" format="dimension"/>
+        <attr name="numTextSize" format="dimension"/>
+        <attr name="numColor" format="color"/>
+        <attr name="unitColor" format="color"/>
+        <attr name="incDecColor" format="color"/>
+    </declare-styleable>
+
+
+</resources>

@@ -1,0 +1,3 @@
+include ':NumberSlidingPickerView'
+include ':app'
+rootProject.name = "NumberSlidingPicker-Android"

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <com.saif.numberslidingpickerview.NumberSlidingPickerView
+        android:id="@+id/num_pick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#CFCFCF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:minNum="1"
+        app:numMargin="12dp"
+        app:unitTopMargin="12dp"
+        app:orientation="Horizontal"
+        app:unitText="Reps"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
