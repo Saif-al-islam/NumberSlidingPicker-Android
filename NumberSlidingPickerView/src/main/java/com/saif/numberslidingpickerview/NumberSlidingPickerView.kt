@@ -13,33 +13,33 @@ import kotlin.math.*
 
 class NumberSlidingPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : View(context, attrs)
 {
-    private var minNum = 0
-    private var maxNum = 100
-    private var initNum = 50//minNum
-    private var currentNum = initNum
-    private var stepNum = 1
-    private var orientation = Orientation.Horizontal
-    private var unitText: String? = null
+    var minNum = 0
+    var maxNum = 100
+    var initNum = 50//minNum
+    var currentNum = initNum
+    var stepNum = 1
+    var orientation = Orientation.Horizontal
+    var unitText: String? = null
     set(value) {
         if (value == null) unitTopMargin = 0f
         field = value
     }
-    private var incDecLength = convertDPtoPX(32)
+    var incDecLength = convertDPtoPX(32)
     /** if (orientation = Vertical) Top Margins only
      *  else if (orientation = Horizontal) Right and Left Margins
      * */
-    private var numMargin: Float = convertDPtoPX(12).toFloat()
+    var numMargin: Float = convertDPtoPX(12).toFloat()
     /** if (orientation = Vertical) Top and Bottom Margins
      * else if (orientation = Horizontal) Top only
      * */
-    private var unitTopMargin: Float = convertDPtoPX(8).toFloat()
+    var unitTopMargin: Float = convertDPtoPX(8).toFloat()
     /*  This Attributes works only in Vertical Orientation */
-    private var unitBottomMargins: Float = convertDPtoPX(8).toFloat()
-    private var unitTextSize: Float = convertSPToPX(18f)
-    private var numTextSize: Float = convertSPToPX(28f)
-    private var numColor = Color.RED
-    private var unitColor = Color.BLUE
-    private var incDecColor = Color.BLACK
+    var unitBottomMargins: Float = convertDPtoPX(8).toFloat()
+    var unitTextSize: Float = convertSPToPX(18f)
+    var numTextSize: Float = convertSPToPX(28f)
+    var numColor = Color.RED
+    var unitColor = Color.BLUE
+    var incDecColor = Color.BLACK
 
     ////    //////////////
     private val paintUnit by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
@@ -493,6 +493,9 @@ class NumberSlidingPickerView @JvmOverloads constructor(context: Context, attrs:
     private fun log(data: String) = Log.d("saif", data)
 
     private fun log(data: String, e: Throwable) = Log.e("saif", data, e)
+
+
+
 
 }
 
