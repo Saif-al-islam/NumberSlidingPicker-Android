@@ -9,6 +9,7 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
+import androidx.core.view.setPadding
 import kotlin.math.*
 
 class NumberSlidingPickerView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : View(context, attrs)
@@ -75,10 +76,10 @@ class NumberSlidingPickerView @JvmOverloads constructor(context: Context, attrs:
                     maxNum = it.getInteger(R.styleable.NumberSlidingPickerView_maxNum, 100)
                     initNum = it.getInteger(R.styleable.NumberSlidingPickerView_initNum, 0)
                     stepNum = it.getInteger(R.styleable.NumberSlidingPickerView_stepNum, 1)
-                    it.getInteger(R.styleable.NumberSlidingPickerView_orientation, Orientation.Horizontal.value).run {
-                        orientation = if (this == Orientation.Horizontal.value)
-                            Orientation.Horizontal else Orientation.Vertical
-                    }
+//                    it.getInteger(R.styleable.NumberSlidingPickerView_orientation, Orientation.Horizontal.value).run {
+//                        orientation = if (this == Orientation.Horizontal.value)
+//                            Orientation.Horizontal else Orientation.Vertical
+//                    } //todo
                     unitText = it.getString(R.styleable.NumberSlidingPickerView_unitText)
                     numMargin = it.getDimension(R.styleable.NumberSlidingPickerView_numMargin, numMargin)
                     unitTopMargin = it.getDimension(R.styleable.NumberSlidingPickerView_unitTopMargin, unitTopMargin)
@@ -104,7 +105,7 @@ class NumberSlidingPickerView @JvmOverloads constructor(context: Context, attrs:
         with(paintNum)
         {
             color = numColor
-            style = Paint.Style.STROKE
+            style = Paint.Style.FILL
             textSize = numTextSize
             textAlign = Paint.Align.CENTER
         }
@@ -122,6 +123,9 @@ class NumberSlidingPickerView @JvmOverloads constructor(context: Context, attrs:
             color = incDecColor
             style = Paint.Style.FILL
         }
+
+        setPadding(18)
+
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int)
@@ -147,16 +151,16 @@ class NumberSlidingPickerView @JvmOverloads constructor(context: Context, attrs:
         if (orientation == Orientation.Horizontal)
         {
             desiredWidth = (
-                    (widthOfTriangle(Orientation.Horizontal) * 2) + max(unitTextWidth, numWidth) + (numMargin * 2))
+                    (widthOfTriangle(Orientation.Horizontal) * 2) + max(unitTextWidth, numWidth) + (numMargin * 2) + paddingStart + paddingEnd)
                     .roundToInt()
             desiredHeight = (
-                    max(heightOfTriangle(Orientation.Horizontal), numHeight.toFloat()) + unitTextHeight + unitTopMarginTemp
+                    max(heightOfTriangle(Orientation.Horizontal), numHeight.toFloat()) + unitTextHeight + unitTopMarginTemp + paddingTop + paddingBottom
                     ).roundToInt()
         }
         else
         {
-            desiredWidth = max(max(widthOfTriangle(Orientation.Vertical), numWidth.toFloat()), unitTextWidth.toFloat()).roundToInt()
-            desiredHeight = ( (heightOfTriangle(Orientation.Vertical) * 2) + numHeight + unitTextHeight + numMargin + unitBottomMarginTemp + unitTopMarginTemp
+            desiredWidth = max(max(widthOfTriangle(Orientation.Vertical), numWidth.toFloat()), unitTextWidth.toFloat()).roundToInt() + paddingStart + paddingEnd
+            desiredHeight = ( (heightOfTriangle(Orientation.Vertical) * 2) + numHeight + unitTextHeight + numMargin + unitBottomMarginTemp + unitTopMarginTemp + paddingTop + paddingBottom
                     ).roundToInt()
 
             Log.d("saif", "numHeight= $numHeight,   unitTextHeight= $unitTextHeight,   numMargin= $numMargin,   unitMarginTemp= $unitTopMarginTemp")
@@ -198,32 +202,32 @@ class NumberSlidingPickerView @JvmOverloads constructor(context: Context, attrs:
 
                 with(leftPath)
                 {
-                    moveTo(0f, headTriangleY)
-                    lineTo(widthOfTriangle, headTriangleY - (incDecLength/2))
-                    lineTo(widthOfTriangle, headTriangleY + (incDecLength/2))
+                    moveTo(paddingStart.toFloat(), headTriangleY)
+                    lineTo(widthOfTriangle + paddingStart, headTriangleY - (incDecLength/2))
+                    lineTo(widthOfTriangle + paddingStart, headTriangleY + (incDecLength/2))
                     close()
                 }
                 with(rightPath)
                 {
-                    moveTo(width.toFloat(), headTriangleY)
-                    lineTo(width - widthOfTriangle, headTriangleY - (incDecLength/2))
-                    lineTo(width - widthOfTriangle, headTriangleY + (incDecLength/2))
+                    moveTo(width.toFloat() - paddingEnd, headTriangleY)
+                    lineTo(width - widthOfTriangle - paddingEnd, headTriangleY - (incDecLength/2))
+                    lineTo(width - widthOfTriangle - paddingEnd, headTriangleY + (incDecLength/2))
                     close()
                 }
             }
             Orientation.Vertical -> {
                 with(rightPath)
                 {
-                    moveTo(width/2f, 0f)
-                    lineTo((width/2f) + (incDecLength/2), heightOfTriangle(Orientation.Vertical))
-                    lineTo((width/2f) - (incDecLength/2), heightOfTriangle(Orientation.Vertical))
+                    moveTo(width/2f, paddingTop.toFloat())
+                    lineTo((width/2f) + (incDecLength/2), heightOfTriangle(Orientation.Vertical) + paddingTop)
+                    lineTo((width/2f) - (incDecLength/2), heightOfTriangle(Orientation.Vertical) + paddingTop)
                     close()
                 }
                 with(leftPath)
                 {
                     moveTo(width/2f, height.toFloat())
-                    lineTo((width/2f) + (incDecLength/2), height - heightOfTriangle(Orientation.Vertical))
-                    lineTo((width/2f) - (incDecLength/2), height - heightOfTriangle(Orientation.Vertical))
+                    lineTo((width/2f) + (incDecLength/2), height - heightOfTriangle(Orientation.Vertical) - paddingBottom)
+                    lineTo((width/2f) - (incDecLength/2), height - heightOfTriangle(Orientation.Vertical) - paddingBottom)
                     close()
                 }
             }
@@ -252,7 +256,8 @@ class NumberSlidingPickerView @JvmOverloads constructor(context: Context, attrs:
         canvas.drawPath(leftPath, paintIncDec)
 
         val currentX = (width/2f)
-        var currentY = if (rectNumBounds.height() > heightOfTriangle(Orientation.Horizontal))
+        val whiteSpaceY = (height - (rectNumBounds.height() + rectUnitTextBounds.height() + unitTopMargin + paddingTop + paddingBottom)) / 2
+        var currentY = whiteSpaceY + paddingTop+ if (rectNumBounds.height() > heightOfTriangle(Orientation.Horizontal))
             rectNumBounds.height().toFloat()
         else ((incDecLength/2f) + (rectNumBounds.height()/2f))
 
@@ -271,7 +276,8 @@ class NumberSlidingPickerView @JvmOverloads constructor(context: Context, attrs:
         canvas.drawPath(leftPath, paintIncDec)
 
         val currentX = width / 2f
-        var currentY = heightOfTriangle(Orientation.Vertical) + numMargin + rectNumBounds.height()
+        val whiteSpaceY = (height - (heightOfTriangle(Orientation.Vertical)*2 + rectNumBounds.height() + rectUnitTextBounds.height() + unitTopMargin+ unitBottomMargins + paddingTop + paddingBottom)) / 2
+        var currentY = whiteSpaceY + heightOfTriangle(Orientation.Vertical) + numMargin + rectNumBounds.height()
 
         canvas.drawText(currentNum.toString(), currentX , currentY, paintNum)
 

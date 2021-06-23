@@ -16,9 +16,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:minNum="1"
+        android:padding="12dp"
+        android:background="@mipmap/ic_launcher_round"
         app:numMargin="12dp"
         app:unitTopMargin="12dp"
         app:orientation="Horizontal"
         app:unitText="sec"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
