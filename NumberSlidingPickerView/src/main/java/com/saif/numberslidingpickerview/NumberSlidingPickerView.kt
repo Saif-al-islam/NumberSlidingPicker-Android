@@ -307,7 +307,7 @@ class NumberSlidingPickerView @JvmOverloads constructor(context: Context, attrs:
             MotionEvent.ACTION_MOVE-> {
                 onTouchMoveEvent(xCor, yCor)
             }
-            MotionEvent.ACTION_UP-> {
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL-> {
                 log("isTouchInc= $isTouchInc    , isTouchDec= $isTouchDec")
 
                 lastCor = 0f
