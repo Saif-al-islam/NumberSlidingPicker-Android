@@ -1,5 +1,7 @@
 [![platform](https://img.shields.io/badge/platform-Android-yellow.svg)](https://www.android.com)
  [![API](https://img.shields.io/badge/API-%2B17-green.svg)]()
+ [![](https://jitpack.io/v/Saif-al-islam/NumberSlidingPicker-Android.svg)](https://jitpack.io/#Saif-al-islam/NumberSlidingPicker-Android)
+
 
 **Number Sliding Picker - Android** - An Android library that can increase and decrease the Count.
 
@@ -13,7 +15,7 @@ Include the library as a local library project or add the dependency in your bui
 
 ```groovy
 dependencies {
-	   implementation 'com.github.Saif-al-islam:NumberSlidingPicker-Android:1.0'
+	   implementation 'com.github.Saif-al-islam:NumberSlidingPicker-Android:1.2'
 	}
 ```
 
