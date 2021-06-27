@@ -15,7 +15,7 @@ Include the library as a local library project or add the dependency in your bui
 
 ```groovy
 dependencies {
-	   implementation 'com.github.Saif-al-islam:NumberSlidingPicker-Android:1.2'
+	   implementation 'com.github.Saif-al-islam:NumberSlidingPicker-Android:1.2.1'
 	}
 ```
 
