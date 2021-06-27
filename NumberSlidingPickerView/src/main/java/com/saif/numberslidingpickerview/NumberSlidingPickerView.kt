@@ -76,10 +76,10 @@ class NumberSlidingPickerView @JvmOverloads constructor(context: Context, attrs:
                     maxNum = it.getInteger(R.styleable.NumberSlidingPickerView_maxNum, 100)
                     initNum = it.getInteger(R.styleable.NumberSlidingPickerView_initNum, 0)
                     stepNum = it.getInteger(R.styleable.NumberSlidingPickerView_stepNum, 1)
-//                    it.getInteger(R.styleable.NumberSlidingPickerView_orientation, Orientation.Horizontal.value).run {
-//                        orientation = if (this == Orientation.Horizontal.value)
-//                            Orientation.Horizontal else Orientation.Vertical
-//                    } //todo
+                    it.getInteger(R.styleable.NumberSlidingPickerView_orientation, Orientation.Horizontal.value).run {
+                        orientation = if (this == Orientation.Horizontal.value)
+                            Orientation.Horizontal else Orientation.Vertical
+                    }
                     unitText = it.getString(R.styleable.NumberSlidingPickerView_unitText)
                     numMargin = it.getDimension(R.styleable.NumberSlidingPickerView_numMargin, numMargin)
                     unitTopMargin = it.getDimension(R.styleable.NumberSlidingPickerView_unitTopMargin, unitTopMargin)
